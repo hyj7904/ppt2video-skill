@@ -1,0 +1,34 @@
+{
+  "name": "PPT转视频",
+  "id": "com.trae.ppt2video",
+  "version": "1.1.0",
+  "description": "将PPT演示文稿自动转换为带语音讲解的视频",
+  "author": {
+    "name": "Trae AI",
+    "email": "support@trae.cn"
+  },
+  "keywords": ["ppt", "video", "tts", "ai", "presentation"],
+  "categories": ["工具", "多媒体"],
+  "compatibility": {
+    "python": ">=3.10"
+  },
+  "dependencies": {
+    "python": ">=3.10",
+    "packages": [
+      {"name": "python-pptx", "version": ">=0.6.21"},
+      {"name": "moviepy", "version": ">=1.0.3"},
+      {"name": "openai", "version": ">=1.0.0"},
+      {"name": "requests", "version": ">=2.28.0"},
+      {"name": "PyYAML", "version": ">=6.0"}
+    ]
+  },
+  "capabilities": [
+    "file_read",
+    "file_write",
+    "network_request"
+  ],
+  "privacy": {
+    "data_processing": "本地处理",
+    "data_storage": "仅临时存储"
+  }
+}

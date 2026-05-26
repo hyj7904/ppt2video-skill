@@ -1,0 +1,128 @@
+# 技能元数据
+name: "PPTtoVideo"
+id: "ppt2video"
+version: "1.1.0"
+author: "Trae AI"
+description: "将PPT演示文稿转换为带语音讲解的视频，支持配置管理和连通性测试"
+category: "多媒体工具"
+tags: ["PPT", "视频", "语音合成", "AI", "配置", "测试"]
+icon: "icon.png"
+
+# 操作类型
+actions:
+  - name: "convert"
+    description: "转换PPT为视频"
+    default: true
+  
+  - name: "wizard"
+    description: "获取配置引导（首次安装使用）"
+  
+  - name: "setup"
+    description: "提交配置（首次安装或修改配置）"
+  
+  - name: "check_config"
+    description: "检查配置状态"
+  
+  - name: "list_voices"
+    description: "获取发音人列表"
+  
+  - name: "configure"
+    description: "直接更新配置参数"
+  
+  - name: "validate"
+    description: "验证API连通性"
+  
+  - name: "get_config"
+    description: "获取当前配置"
+
+# 输入参数
+inputs:
+  - name: "ppt_file"
+    type: "file"
+    required: true
+    description: "PPT文件路径，支持 .pptx 格式"
+    example: "/path/to/presentation.pptx"
+  
+  - name: "output_path"
+    type: "string"
+    required: false
+    description: "输出视频路径，默认为输入目录"
+    example: "/path/to/output.mp4"
+  
+  - name: "mode"
+    type: "string"
+    required: false
+    description: "转换模式"
+    default: "full"
+    options:
+      - label: "快速预览"
+        value: "preview_3"
+      - label: "完整转换"
+        value: "full"
+  
+  - name: "voice"
+    type: "string"
+    required: false
+    description: "发音人"
+    default: "longanyang"
+    options:
+      - label: "优雅知性女"
+        value: "longanyang"
+      - label: "居家暖男"
+        value: "longanyun"
+      - label: "天真烂漫女童"
+        value: "longhuhu"
+      - label: "美式英文女"
+        value: "loongdonna_v2"
+  
+  - name: "speed"
+    type: "number"
+    required: false
+    description: "语速，范围 0.8-1.5"
+    default: 1.0
+    min: 0.8
+    max: 1.5
+  
+  - name: "use_llm"
+    type: "boolean"
+    required: false
+    description: "是否使用AI优化讲稿"
+    default: true
+
+# 输出参数
+outputs:
+  - name: "video_file"
+    type: "file"
+    description: "生成的视频文件路径"
+  
+  - name: "status"
+    type: "string"
+    description: "转换状态"
+  
+  - name: "message"
+    type: "string"
+    description: "结果消息"
+  
+  - name: "stats"
+    type: "object"
+    description: "转换统计信息"
+    properties:
+      slides: "幻灯片数量"
+      duration: "视频时长"
+      audio_files: "音频文件数量"
+
+# 执行配置
+execution:
+  type: "sync"
+  timeout: 3600
+  memory_limit: "512MB"
+
+# 资源要求
+requirements:
+  python_version: ">=3.10"
+  packages:
+    - python-pptx>=0.6.21
+    - moviepy>=1.0.3
+    - openai>=1.0.0
+    - requests>=2.28.0
+    - PyYAML>=6.0
